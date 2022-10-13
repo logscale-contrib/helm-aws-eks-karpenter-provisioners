@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "karpenter-provisioners.labels" . | nindent 4 }}
 spec:
-  {{- with .Values.requirements }}
+  {{- with .Values.labels }}
   labels:
     {{- toYaml . | nindent 4 }}
   {{- end }}    
