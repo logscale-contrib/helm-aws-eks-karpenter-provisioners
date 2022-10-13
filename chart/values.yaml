@@ -4,6 +4,8 @@
 
 # clusterID: foo
 requirements:
+  arch:
+    - amd64
   capacityType:
     - spot
     - on-demand

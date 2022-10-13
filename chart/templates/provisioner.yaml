@@ -22,18 +22,24 @@ spec:
       {{- toYaml . | nindent 6 }}
     {{- end }}    
   {{- end }}    
-    
+  {{- with .arch }}
+    - key: "node.kubernetes.io/arch"
+      operator: In
+      values:
+      {{- toYaml . | nindent 6 }}
+    {{- end }}    
+  {{- end }}        
   limits:
     resources:
       cpu: {{ .Values.limits.resources.cpu }}
-      cpu: {{ .Values.limits.resources.memory }}
+      memory: {{ .Values.limits.resources.memory }}
   provider:
     subnetSelector:
-      kubernetes.io/cluster/{{ .Values.clusterID }}: "shared"
+      Name: "*public*"
     securityGroupSelector:
-      kubernetes.io/cluster/{{ .Values.clusterID }}: "shared"
+      karpenter.sh/discovery/{{ .Values.clusterID }}: {{ .Values.clusterID }}    
     tags:
-      kubernetes.io/cluster/{{ .Values.clusterID }}: "shared"
+      karpenter.sh/discovery/{{ .Values.clusterID }}: {{ .Values.clusterID }}    
   ttlSecondsAfterEmpty: 30
   ttlSecondsUntilExpired: 2592000 # = 30 days * 86400
 
