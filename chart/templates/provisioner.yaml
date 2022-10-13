@@ -24,7 +24,7 @@ spec:
       {{- toYaml . | nindent 6 }}
     {{- end }}    
   {{- with .arch }}
-    - key: "node.kubernetes.io/arch"
+    - key: "kubernetes.io/arch"
       operator: In
       values:
       {{- toYaml . | nindent 6 }}

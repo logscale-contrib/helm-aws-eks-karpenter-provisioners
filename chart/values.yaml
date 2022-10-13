@@ -19,5 +19,5 @@ requirements:
     - m4.xlarge
 limits:
   resources:
-    cpu: 1000
+    cpu: 1k
     memory: 1000Gi
