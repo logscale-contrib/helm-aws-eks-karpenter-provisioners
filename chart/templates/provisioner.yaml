@@ -5,8 +5,10 @@ metadata:
   labels:
     {{- include "karpenter-provisioners.labels" . | nindent 4 }}
 spec:
+  {{- with .Values.requirements }}
   labels:
-    beta.crowdstrike.com/pool: {{ .Release.Name }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}    
   {{- with .Values.requirements }}
   requirements:
     {{- with .capacityType }}
